@@ -4,9 +4,7 @@ import com.verycoolapp.idea.dto.IdeaDTO;
 import com.verycoolapp.idea.service.IdeaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,10 @@ public class IdeaResource {
     @GetMapping
     public List<IdeaDTO> getAllIdeas() {
         return ideaService.getAllIdeas();
+    }
+
+    @PostMapping
+    public IdeaDTO createIdea(@RequestBody final IdeaDTO ideaDTO) {
+        return ideaService.createIdea(ideaDTO);
     }
 }

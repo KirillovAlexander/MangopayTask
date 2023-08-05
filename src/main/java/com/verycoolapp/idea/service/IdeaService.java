@@ -21,4 +21,9 @@ public class IdeaService {
         var ideas = ideaRepository.findAll();
         return ideaMapper.convert(ideas);
     }
+
+    public IdeaDTO createIdea(final IdeaDTO ideaDTO) {
+        var idea = ideaRepository.save(ideaMapper.convert(ideaDTO));
+        return ideaMapper.convert(idea);
+    }
 }

@@ -10,4 +10,8 @@ import java.util.List;
 public interface IdeaMapper {
 
     List<IdeaDTO> convert(final List<Idea> ideas);
+
+    Idea convert(final IdeaDTO ideaDTO);
+
+    IdeaDTO convert(final Idea idea);
 }
