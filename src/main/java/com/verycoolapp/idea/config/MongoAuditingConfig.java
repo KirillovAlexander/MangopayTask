@@ -1,5 +1,6 @@
 package com.verycoolapp.idea.config;
 
+import com.verycoolapp.idea.util.PrincipalUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -19,6 +20,6 @@ public class MongoAuditingConfig {
         return () -> Optional.ofNullable(SecurityContextHolder.getContext())
                 .map(SecurityContext::getAuthentication)
                 .filter(Authentication::isAuthenticated)
-                .map(Authentication::getName);
+                .map(authentication -> PrincipalUtils.getPrincipalEmail(authentication.getPrincipal()));
     }
 }

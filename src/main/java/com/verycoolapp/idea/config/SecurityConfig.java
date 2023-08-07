@@ -16,8 +16,8 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers(HttpMethod.GET, "/").authenticated();
-                    auth.requestMatchers(HttpMethod.POST, "/").authenticated();
+                    auth.requestMatchers(HttpMethod.GET, "/api/ideas").authenticated();
+                    auth.requestMatchers(HttpMethod.POST, "/api/ideas").authenticated();
                 })
                 .oauth2Login(Customizer.withDefaults())
                 .build();
