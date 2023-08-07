@@ -2,6 +2,7 @@ package com.verycoolapp.idea.rest;
 
 import com.verycoolapp.idea.dto.IdeaDTO;
 import com.verycoolapp.idea.service.IdeaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class IdeaResource {
     }
 
     @PostMapping
-    public IdeaDTO createIdea(@RequestBody final IdeaDTO ideaDTO) {
+    public IdeaDTO createIdea(@Valid @RequestBody final IdeaDTO ideaDTO) {
         return ideaService.createIdea(ideaDTO);
     }
 }
