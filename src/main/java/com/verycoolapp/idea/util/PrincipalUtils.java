@@ -5,6 +5,7 @@ import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.OAuth2AuthenticatedPrincipal;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 
 import java.util.Optional;
 
@@ -21,6 +22,13 @@ public class PrincipalUtils {
             return Optional.of(token)
                     .map(OAuth2AuthenticationToken::getPrincipal)
                     .map(OAuth2AuthenticatedPrincipal::getAttributes)
+                    .map(map -> map.get(EMAIL_FIELD))
+                    .map(Object::toString)
+                    .orElseThrow(() -> new TokenAttributeProcessingException(ERROR_MESSAGE));
+        }
+        if (principal instanceof DefaultOAuth2User user) {
+            return Optional.of(user)
+                    .map(DefaultOAuth2User::getAttributes)
                     .map(map -> map.get(EMAIL_FIELD))
                     .map(Object::toString)
                     .orElseThrow(() -> new TokenAttributeProcessingException(ERROR_MESSAGE));
